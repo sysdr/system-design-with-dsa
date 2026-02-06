@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Python (if any)
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.pyc
+.pytest_cache/
+
+# Istio / vendor / rr
+istio/
+vendor/
+*.rr
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# IDE and OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Project runtime and secrets
+.start.lock
+metrics.json
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*

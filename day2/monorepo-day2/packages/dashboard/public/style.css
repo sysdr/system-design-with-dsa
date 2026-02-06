@@ -1,0 +1,447 @@
+:root {
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --surface2: #243044;
+  --border: #2d3a4d;
+  --text: #e6edf3;
+  --text-muted: #8b9cb3;
+  --accent: #58a6ff;
+  --accent-dim: #388bfd66;
+  --green: #3fb950;
+  --green-dim: #3fb95040;
+  --orange: #d29922;
+  --font: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+.layout {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Header */
+.header {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.live-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  background: var(--green-dim);
+  color: var(--green);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.live-badge .pulse {
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* Sections */
+section {
+  margin-bottom: 2.5rem;
+}
+
+section h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Goals */
+.goals ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.goals li {
+  margin-bottom: 0.6rem;
+}
+
+.goals code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  padding: 0.15em 0.4em;
+  background: var(--surface2);
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+/* Architecture diagram */
+.arch-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.arch-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  padding: 0.9rem 1.25rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.arch-node .label {
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+
+.arch-node .sublabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.arch-node.shared {
+  background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 100%);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.arch-node.frontend {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+.arch-node.backend {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+.arch-arrows {
+  display: flex;
+  gap: 4rem;
+}
+
+.arrow.down {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--text-muted);
+}
+
+.arch-row {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Info cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  padding: 1.1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.card code {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--orange);
+}
+
+/* Metrics */
+.metrics-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.btn-run-demo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  min-width: 7rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--green);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-run-demo:hover:not(:disabled) {
+  background: #46c35a;
+}
+
+.btn-run-demo:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-run-demo:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.btn-run-demo.loading .btn-text {
+  visibility: hidden;
+}
+
+.btn-run-demo .btn-spinner {
+  display: none;
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--border);
+  border-top-color: var(--bg);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.btn-run-demo.loading .btn-spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.metrics-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.metrics-hint code {
+  font-family: var(--font-mono);
+  padding: 0.1em 0.35em;
+  background: var(--surface2);
+  border-radius: 4px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 560px) {
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.metric-card {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card.updated {
+  border-color: var(--green);
+  box-shadow: 0 0 0 1px var(--green-dim);
+}
+
+.metric-card.wide {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.metric-value.small {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Demo logs */
+.demo-logs-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.demo-logs-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demo-logs-hint {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.demo-logs-container {
+  max-height: 320px;
+  overflow: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+}
+
+.demo-logs-pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.demo-logs-pre .log-line {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.demo-logs-pre .log-ts {
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+}
+
+.demo-logs-pre .log-source {
+  display: inline-block;
+  min-width: 4.5rem;
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.demo-logs-pre .log-source.frontend {
+  color: var(--accent);
+}
+
+.demo-logs-pre .log-source.backend {
+  color: var(--orange);
+}
+
+.demo-logs-empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer p {
+  margin: 0;
+}

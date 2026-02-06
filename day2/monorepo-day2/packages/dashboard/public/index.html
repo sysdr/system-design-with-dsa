@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monorepo Day 2 — Dashboard</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="layout">
+    <header class="header">
+      <h1>Monorepo Day 2</h1>
+      <p class="tagline">Shared types & configuration — live metrics</p>
+      <div class="live-badge" id="liveBadge">
+        <span class="pulse"></span>
+        <span>Live</span>
+      </div>
+    </header>
+
+    <section class="goals">
+      <h2>Project goals</h2>
+      <ul>
+        <li>Single source of truth for types (<code>IProblem</code>, <code>ISubmission</code>) and config (<code>API_BASE_URL</code>, <code>PROBLEM_FETCH_TIMEOUT_MS</code>).</li>
+        <li>Frontend and Backend consume shared TypeScript; no type drift or duplicate definitions.</li>
+        <li>Demo runs validate that both services use the same types and configuration.</li>
+      </ul>
+    </section>
+
+    <section class="architecture">
+      <h2>Architecture</h2>
+      <div class="arch-diagram">
+        <div class="arch-node shared">
+          <span class="label">shared</span>
+          <span class="sublabel">Types & config</span>
+        </div>
+        <div class="arch-arrows">
+          <div class="arrow down"></div>
+          <div class="arrow down"></div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-node frontend">
+            <span class="label">frontend</span>
+            <span class="sublabel">Problem display</span>
+          </div>
+          <div class="arch-node backend">
+            <span class="label">backend</span>
+            <span class="sublabel">Submissions</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-cards">
+      <h2>Packages</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>shared</h3>
+          <p>Exports <code>IProblem</code>, <code>ISubmission</code>, <code>API_BASE_URL</code>, <code>PROBLEM_FETCH_TIMEOUT_MS</code>. Built first; frontend and backend depend on it.</p>
+        </div>
+        <div class="card">
+          <h3>frontend</h3>
+          <p>Displays problem details using shared types. Simulates fetching a problem and logging config (API URL, timeout).</p>
+        </div>
+        <div class="card">
+          <h3>backend</h3>
+          <p>Processes submissions using shared types. Simulates receiving a problem and judging a submission (Pending → Accepted).</p>
+        </div>
+        <div class="card">
+          <h3>dashboard</h3>
+          <p>This server. Serves project overview and real-time metrics. Use the <strong>Run demo</strong> button above or <code>./start.sh</code> to trigger demo runs; metrics update here.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <h2>Real-time metrics</h2>
+      <div class="metrics-actions">
+        <button type="button" class="btn-run-demo" id="runDemoBtn" aria-label="Run demo">
+          <span class="btn-text">Run demo</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <p class="metrics-hint">Runs frontend + backend; counters update automatically.</p>
+      </div>
+      <div class="metrics-grid" id="metricsGrid">
+        <div class="metric-card">
+          <span class="metric-value" id="demoRuns">0</span>
+          <span class="metric-label">Demo runs</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-value" id="frontendRuns">0</span>
+          <span class="metric-label">Frontend runs</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-value" id="backendRuns">0</span>
+          <span class="metric-label">Backend runs</span>
+        </div>
+        <div class="metric-card wide">
+          <span class="metric-label">Last demo</span>
+          <span class="metric-value small" id="lastDemo">—</span>
+        </div>
+      </div>
+      <div class="demo-logs-section">
+        <h3 class="demo-logs-title">Demo logs</h3>
+        <p class="demo-logs-hint">Output from the last run (frontend + backend). Timestamps in local time.</p>
+        <div class="demo-logs-container" id="demoLogsContainer">
+          <pre class="demo-logs-pre" id="demoLogsPre"><span class="demo-logs-empty" id="demoLogsEmpty">No demo run yet. Click &quot;Run demo&quot; to see logs.</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Monorepo Day 2 · System Design with DSA</p>
+    </footer>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>

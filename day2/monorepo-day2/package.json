@@ -1,0 +1,33 @@
+{
+  "name": "monorepo-day2",
+  "version": "1.0.0",
+  "description": "Monorepo setup with shared types and configuration",
+  "main": "index.js",
+  "scripts": {
+    "build:all": "pnpm -r build",
+    "start:frontend": "cd packages/frontend && node dist/index.js",
+    "start:backend": "cd packages/backend && node dist/index.js",
+    "start:dashboard": "cd packages/dashboard && node dist/index.js",
+    "start:all": "echo 'Starting Frontend and Backend services...' && pnpm start:frontend & pnpm start:backend && wait -n",
+    "test:all": "echo 'No tests implemented for this lesson. Functional verification via console output.'",
+    "verify:functionality": "echo 'Verifying functionality via console output...'"
+  },
+  "keywords": [
+    "monorepo",
+    "system-design",
+    "pnpm",
+    "typescript"
+  ],
+  "author": "System Design Expert",
+  "license": "ISC",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.2.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "shared": "workspace:*"
+  }
+}
