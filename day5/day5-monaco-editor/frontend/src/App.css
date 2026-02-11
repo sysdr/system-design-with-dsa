@@ -1,0 +1,255 @@
+/* Layout and typography */
+.App {
+  min-height: 100vh;
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+}
+
+.App--centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.App-error {
+  color: #f85149;
+  margin: 0 0 0.5rem;
+}
+
+.App-loading,
+.App-hint {
+  color: #8b949e;
+  margin: 0;
+}
+
+/* Header: app title and short intro */
+.App-header {
+  grid-area: header;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #30363d;
+  background: #161b22;
+}
+
+.App-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+.App-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+
+/* Sidebar: problem list */
+.App-sidebar {
+  grid-area: sidebar;
+  padding: 1rem 0.75rem;
+  border-right: 1px solid #30363d;
+  background: #161b22;
+  overflow-y: auto;
+}
+
+.App-sidebarTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8b949e;
+  padding: 0 0.5rem;
+}
+
+.App-problemList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.App-problemList li {
+  margin-bottom: 0.25rem;
+}
+
+.App-problemBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #e6edf3;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.App-problemBtn:hover {
+  background: #21262d;
+}
+
+.App-problemBtn--active {
+  background: #238636;
+  color: #fff;
+}
+
+.App-problemBtn--active:hover {
+  background: #2ea043;
+}
+
+.App-problemBtnTitle {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.App-problemBtnBadge {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+.App-problemBtnBadge--easy {
+  background: rgba(63, 185, 80, 0.2);
+  color: #3fb950;
+}
+
+.App-problemBtnBadge--medium {
+  background: rgba(210, 153, 34, 0.2);
+  color: #d29922;
+}
+
+.App-problemBtnBadge--hard {
+  background: rgba(248, 81, 73, 0.2);
+  color: #f85149;
+}
+
+/* Main: problem title, description, editor */
+.App-main {
+  grid-area: main;
+  padding: 1rem 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-problemHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.App-problemName {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #58a6ff;
+}
+
+.App-difficulty {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.App-difficulty--easy {
+  background: rgba(63, 185, 80, 0.2);
+  color: #3fb950;
+}
+
+.App-difficulty--medium {
+  background: rgba(210, 153, 34, 0.2);
+  color: #d29922;
+}
+
+.App-difficulty--hard {
+  background: rgba(248, 81, 73, 0.2);
+  color: #f85149;
+}
+
+.App-description {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.App-description pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #8b949e;
+}
+
+.App-editorWrap {
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+/* Footer: hint + draft status (clear, not confusing) */
+.App-footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  border-top: 1px solid #30363d;
+  margin-top: auto;
+}
+
+.App-footerHint {
+  color: #8b949e;
+}
+
+.App-draftStatus {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.App-draftStatus--idle {
+  background: #21262d;
+  color: #8b949e;
+}
+
+.App-draftStatus--saving {
+  background: rgba(210, 153, 34, 0.2);
+  color: #d29922;
+}
+
+.App-draftStatus--saved {
+  background: rgba(63, 185, 80, 0.2);
+  color: #3fb950;
+}
+
+.App-draftStatus--error {
+  background: rgba(248, 81, 73, 0.2);
+  color: #f85149;
+}

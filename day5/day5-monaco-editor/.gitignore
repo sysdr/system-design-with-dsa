@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Build and cache
+frontend/build/
+frontend/.cache/
+*.tsbuildinfo
+
+# Python (if ever used)
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment and secrets (no API keys committed)
+.env
+.env.local
+.env.*.local
+*.env
+secrets/
+
+# IDE and OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Project runtime
+.start.lock
+*.log
+
+# Vendor and misc
+vendor/
+*.rr
+
+# Istio (if ever used)
+*istio*
