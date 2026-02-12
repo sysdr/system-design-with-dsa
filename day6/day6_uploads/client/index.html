@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code & File Submission</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f7f6; color: #333; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        textarea, input[type="file"], input[type="text"] {
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;
+            font-size: 1rem;
+        }
+        textarea { min-height: 200px; resize: vertical; font-family: 'Monaco', 'Consolas', monospace; }
+        button {
+            background-color: #007bff; color: white; padding: 12px 25px; border: none; border-radius: 5px;
+            cursor: pointer; font-size: 1.1rem; transition: background-color 0.3s ease; display: block; width: 100%;
+        }
+        button:hover { background-color: #0056b3; }
+        .response-box {
+            margin-top: 30px; padding: 20px; background-color: #e9f7ef; border: 1px solid #c3e6cb; border-radius: 5px;
+            white-space: pre-wrap; word-wrap: break-word; font-family: 'Consolas', monospace; color: #28a745;
+        }
+        .error-box {
+            margin-top: 30px; padding: 20px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px;
+            white-space: pre-wrap; word-wrap: break-word; font-family: 'Consolas', monospace; color: #dc3545;
+        }
+        input[type="file"] { border: none; padding-left: 0; }
+        .file-input-wrapper {
+            border: 1px solid #ddd; padding: 10px; border-radius: 5px; margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submit Your Code & Files</h1>
+
+        <form id="submissionForm" enctype="multipart/form-data">
+            <label for="rawCode">Raw Code Submission (e.g., Python, C++, Java):</label>
+            <textarea id="rawCode" name="rawCode" placeholder="Paste your code here..." rows="10">
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, System Design!" << std::endl;
+    return 0;
+}
+            </textarea>
+
+            <label for="codeFile">Upload Code File (e.g., solution.py, main.cpp):</label>
+            <div class="file-input-wrapper">
+                <input type="file" id="codeFile" name="codeFile" accept=".js,.py,.cpp,.java,.txt">
+            </div>
+
+            <label for="testCases">Upload Test Cases (e.g., tests.json, input.txt):</label>
+            <div class="file-input-wrapper">
+                <input type="file" id="testCases" name="testCases" accept=".json,.txt">
+            </div>
+
+            <button type="submit">Submit Code & Files</button>
+        </form>
+
+        <div id="response" class="response-box" style="display: none;"></div>
+        <div id="error" class="error-box" style="display: none;"></div>
+    </div>
+
+    <script>
+        document.getElementById('submissionForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const responseBox = document.getElementById('response');
+            const errorBox = document.getElementById('error');
+            responseBox.style.display = 'none';
+            errorBox.style.display = 'none';
+            responseBox.textContent = '';
+            errorBox.textContent = '';
+
+            const formData = new FormData();
+            formData.append('rawCode', document.getElementById('rawCode').value);
+
+            const codeFile = document.getElementById('codeFile').files[0];
+            if (codeFile) {
+                formData.append('codeFile', codeFile);
+            }
+
+            const testCasesFile = document.getElementById('testCases').files[0];
+            if (testCasesFile) {
+                formData.append('testCases', testCasesFile);
+            }
+
+            try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    responseBox.style.display = 'block';
+                    responseBox.textContent = JSON.stringify(result, null, 2);
+                } else {
+                    errorBox.style.display = 'block';
+                    errorBox.textContent = `Error: ${result.message || 'Unknown error'}\n${JSON.stringify(result, null, 2)}`;
+                }
+            } catch (error) {
+                errorBox.style.display = 'block';
+                errorBox.textContent = `Network error: ${error.message}`;
+                console.error('Fetch error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
