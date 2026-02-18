@@ -1,0 +1,4 @@
+VAR x = 42
+PRINT x
+VAR y = 10
+PRINT y
