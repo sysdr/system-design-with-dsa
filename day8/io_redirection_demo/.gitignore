@@ -1,0 +1,52 @@
+# Dependencies and virtual env
+node_modules/
+venv/
+.venv/
+env/
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Istio / vendor
+istio/
+vendor/
+*.rr
+
+# IDE and OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Project runtime and secrets (no API keys committed)
+.start.lock
+.demo.lock
+metrics.json
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Docker
+*.docker
